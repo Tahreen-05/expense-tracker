@@ -28,7 +28,8 @@ class ExpenseEntity {
   static ExpenseEntity fromDocument(Map<String, dynamic> doc) {
     return ExpenseEntity(
       expenseId: doc['expenseId'],
-      category: Category.fromEntity(CategoryEntity.fromDocument(doc['category'])),
+      category:
+          Category.fromEntity(CategoryEntity.fromDocument(doc['category'])),
       date: (doc['date'] as Timestamp).toDate(),
       amount: doc['amount'],
     );
