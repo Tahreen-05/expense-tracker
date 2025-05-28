@@ -27,7 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       );
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const LoginScreen()),
+        MaterialPageRoute(builder: (_) => LoginScreen()),
       );
     } on FirebaseAuthException catch (e) {
       String msg;
@@ -80,7 +80,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             TextButton(
               onPressed: () => Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (_) => const LoginScreen()),
+                MaterialPageRoute(builder: (_) => LoginScreen()),
               ),
               child: const Text("Already have an account? Login"),
             )

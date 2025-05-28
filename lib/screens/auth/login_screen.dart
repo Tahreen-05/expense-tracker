@@ -2,9 +2,11 @@ import 'package:expense_repository/expense_repository.dart';
 import 'package:expenses_tracker/screens/home/blocs/get_expenses_bloc/get_expenses_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expenses_tracker/screens/home/views/home_screen.dart';
-import 'package:flutter_bloc/flutter_bloc.dart'; // Update path if needed
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:expenses_tracker/screens/auth/signup_screen.dart';
+import 'package:expenses_tracker/screens/auth/profile_setup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -19,19 +21,21 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool isLoading = false;
 
-  void login() async {
-    setState(() => isLoading = true);
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
+  Future<void> checkUserProfile(User user) async {
+    final doc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get();
+    if (!mounted) return;
 
-      // Show success and navigate to HomeScreen
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login successful!')),
+    if (!doc.exists) {
+      // User hasn't completed profile setup
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const ProfileSetupScreen()),
       );
-
+    } else {
+      // User has completed profile setup
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -42,6 +46,27 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       );
+    }
+  }
+
+  void login() async {
+    setState(() => isLoading = true);
+    try {
+      final userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+
+      // Show success message
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Login successful!')),
+      );
+
+      // Check if user has completed profile setup
+      if (userCredential.user != null) {
+        await checkUserProfile(userCredential.user!);
+      }
     } on FirebaseAuthException catch (e) {
       String msg;
       if (e.code == 'invalid-credential' || e.code == 'wrong-password') {
@@ -68,13 +93,19 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             TextField(
               controller: emailController,
-              decoration: const InputDecoration(labelText: "Email"),
+              decoration: const InputDecoration(
+                labelText: "Email",
+                border: OutlineInputBorder(),
+              ),
               keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(height: 16),
             TextField(
               controller: passwordController,
-              decoration: const InputDecoration(labelText: "Password"),
+              decoration: const InputDecoration(
+                labelText: "Password",
+                border: OutlineInputBorder(),
+              ),
               obscureText: true,
             ),
             const SizedBox(height: 24),
@@ -82,6 +113,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ? const CircularProgressIndicator()
                 : ElevatedButton(
                     onPressed: login,
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 50),
+                    ),
                     child: const Text("Login"),
                   ),
             const SizedBox(height: 16),
@@ -92,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   MaterialPageRoute(builder: (_) => const SignUpScreen()),
                 );
               },
-              child: const Text("Don’t have an account? Sign up"),
+              child: const Text("Don't have an account? Sign up"),
             ),
           ],
         ),
@@ -100,3 +134,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+//
