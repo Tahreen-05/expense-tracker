@@ -8,14 +8,20 @@ class ExpenseEntity {
   Category category;
   DateTime date;
   int amount;
+<<<<<<< HEAD
   String userId;
+=======
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
 
   ExpenseEntity({
     required this.expenseId,
     required this.category,
     required this.date,
     required this.amount,
+<<<<<<< HEAD
     required this.userId,
+=======
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
   });
 
   Map<String, Object?> toDocument() {
@@ -24,13 +30,17 @@ class ExpenseEntity {
       'category': category.toEntity().toDocument(),
       'date': date,
       'amount': amount,
+<<<<<<< HEAD
       'userId': userId,
+=======
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
     };
   }
 
   static ExpenseEntity fromDocument(Map<String, dynamic> doc) {
     return ExpenseEntity(
       expenseId: doc['expenseId'],
+<<<<<<< HEAD
       category: Category.fromEntity(CategoryEntity.fromDocument(doc['category'])),
       date: (doc['date'] as Timestamp).toDate(),
       amount: doc['amount'],
@@ -38,3 +48,12 @@ class ExpenseEntity {
     );
   }
 }
+=======
+      category:
+          Category.fromEntity(CategoryEntity.fromDocument(doc['category'])),
+      date: (doc['date'] as Timestamp).toDate(),
+      amount: doc['amount'],
+    );
+  }
+}
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4

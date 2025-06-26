@@ -14,7 +14,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../add_expense/blocs/create_expense_bloc/create_expense_bloc.dart';
 import 'package:expenses_tracker/screens/auth/login_screen.dart';
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -142,9 +145,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },
                   ),
+<<<<<<< HEAD
 
                  
 
+=======
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
                   ListTile(
                     leading: const Icon(Icons.settings),
                     title: const Text('Settings'),
@@ -163,6 +169,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       );
+<<<<<<< HEAD
+=======
+                      // TODO: Implement settings logic or screen here
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
                     },
                   ),
                   ListTile(

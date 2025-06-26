@@ -65,7 +65,13 @@ class AuthWrapper extends StatelessWidget {
   Future<bool> hasProfileData(String uid) async {
     final doc =
         await FirebaseFirestore.instance.collection('users').doc(uid).get();
+<<<<<<< HEAD
     return doc.exists;
+=======
+    return doc.exists &&
+        doc.data()?['name'] != null &&
+        doc.data()?['monthlyIncome'] != null;
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
   }
 
   @override

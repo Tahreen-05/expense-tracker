@@ -18,6 +18,7 @@ class GetExpensesBloc extends Bloc<GetExpensesEvent, GetExpensesState> {
         emit(GetExpensesFailure());
       }
     });
+<<<<<<< HEAD
 
     on<DeleteExpense>((event, emit) async {
       try {
@@ -27,5 +28,7 @@ class GetExpensesBloc extends Bloc<GetExpensesEvent, GetExpensesState> {
         emit(GetExpensesFailure());
       }
     });
+=======
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
   }
 }

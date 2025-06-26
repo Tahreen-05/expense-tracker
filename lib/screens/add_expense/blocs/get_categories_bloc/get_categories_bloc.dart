@@ -41,6 +41,7 @@ class GetCategoriesBloc extends Bloc<GetCategoriesEvent, GetCategoriesState> {
         emit(GetCategoriesFailure());
       }
     });
+<<<<<<< HEAD
     on<DeleteCategory>((event, emit) async {
       try {
         await expenseRepository.deleteCategory(event.categoryId);
@@ -49,5 +50,7 @@ class GetCategoriesBloc extends Bloc<GetCategoriesEvent, GetCategoriesState> {
         emit(GetCategoriesFailure());
       }
     });
+=======
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
   }
 }

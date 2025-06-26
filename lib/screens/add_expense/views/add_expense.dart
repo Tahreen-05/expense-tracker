@@ -7,8 +7,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
+<<<<<<< HEAD
 import 'package:firebase_auth/firebase_auth.dart';
 
+=======
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
 
 class AddExpense extends StatefulWidget {
   const AddExpense({super.key});
@@ -28,6 +31,7 @@ class _AddExpenseState extends State<AddExpense> {
   @override
   void initState() {
     dateController.text = DateFormat('dd/MM/yyyy').format(DateTime.now());
+<<<<<<< HEAD
     final user = FirebaseAuth.instance.currentUser;
     expense = Expense(
       expenseId: const Uuid().v1(),
@@ -36,6 +40,10 @@ class _AddExpenseState extends State<AddExpense> {
       amount: 0,
       userId: user?.uid ?? '',
     );
+=======
+    expense = Expense.empty;
+    expense.expenseId = const Uuid().v1();
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
     super.initState();
   }
 
@@ -43,9 +51,15 @@ class _AddExpenseState extends State<AddExpense> {
   Widget build(BuildContext context) {
     return BlocListener<CreateExpenseBloc, CreateExpenseState>(
       listener: (context, state) {
+<<<<<<< HEAD
         if(state is CreateExpenseSuccess) {
           Navigator.pop(context, expense);
         } else if(state is CreateExpenseLoading) {
+=======
+        if (state is CreateExpenseSuccess) {
+          Navigator.pop(context, expense);
+        } else if (state is CreateExpenseLoading) {
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
           setState(() {
             isLoading = true;
           });
@@ -68,7 +82,12 @@ class _AddExpenseState extends State<AddExpense> {
                     children: [
                       const Text(
                         "Add Expenses",
+<<<<<<< HEAD
                         style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+=======
+                        style: TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.w500),
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
                       ),
                       const SizedBox(
                         height: 16,
@@ -86,7 +105,13 @@ class _AddExpenseState extends State<AddExpense> {
                               size: 16,
                               color: Colors.grey,
                             ),
+<<<<<<< HEAD
                             border: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide.none),
+=======
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide.none),
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
                           ),
                         ),
                       ),
@@ -100,6 +125,7 @@ class _AddExpenseState extends State<AddExpense> {
                         onTap: () {},
                         decoration: InputDecoration(
                           filled: true,
+<<<<<<< HEAD
                           fillColor: expense.category == Category.empty ? Colors.white : Color(expense.category.color),
                           prefixIcon: expense.category == Category.empty
                             ? const Icon(
@@ -126,6 +152,39 @@ class _AddExpenseState extends State<AddExpense> {
                           ),
                           hintText: 'Category',
                           border: const OutlineInputBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(12)), borderSide: BorderSide.none),
+=======
+                          fillColor: expense.category == Category.empty
+                              ? Colors.white
+                              : Color(expense.category.color),
+                          prefixIcon: expense.category == Category.empty
+                              ? const Icon(
+                                  FontAwesomeIcons.list,
+                                  size: 16,
+                                  color: Colors.grey,
+                                )
+                              : Image.asset(
+                                  'assets/${expense.category.icon}.png',
+                                  scale: 2,
+                                ),
+                          suffixIcon: IconButton(
+                              onPressed: () async {
+                                var newCategory =
+                                    await getCategoryCreation(context);
+                                setState(() {
+                                  state.categories.insert(0, newCategory);
+                                });
+                              },
+                              icon: const Icon(
+                                FontAwesomeIcons.plus,
+                                size: 16,
+                                color: Colors.grey,
+                              )),
+                          hintText: 'Category',
+                          border: const OutlineInputBorder(
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(12)),
+                              borderSide: BorderSide.none),
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
                         ),
                       ),
                       Container(
@@ -133,6 +192,7 @@ class _AddExpenseState extends State<AddExpense> {
                         width: MediaQuery.of(context).size.width,
                         decoration: const BoxDecoration(
                           color: Colors.white,
+<<<<<<< HEAD
                           borderRadius: BorderRadius.vertical(bottom: Radius.circular(12)),
                         ),
                         child: Padding(
@@ -166,6 +226,39 @@ class _AddExpenseState extends State<AddExpense> {
                             }
                           )
                         ),
+=======
+                          borderRadius: BorderRadius.vertical(
+                              bottom: Radius.circular(12)),
+                        ),
+                        child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ListView.builder(
+                                itemCount: state.categories.length,
+                                itemBuilder: (context, int i) {
+                                  return Card(
+                                    child: ListTile(
+                                      onTap: () {
+                                        setState(() {
+                                          expense.category =
+                                              state.categories[i];
+                                          categoryController.text =
+                                              expense.category.name;
+                                        });
+                                      },
+                                      leading: Image.asset(
+                                        'assets/${state.categories[i].icon}.png',
+                                        scale: 2,
+                                      ),
+                                      title: Text(state.categories[i].name),
+                                      tileColor:
+                                          Color(state.categories[i].color),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
+                                    ),
+                                  );
+                                })),
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
                       ),
                       const SizedBox(
                         height: 16,
@@ -175,11 +268,25 @@ class _AddExpenseState extends State<AddExpense> {
                         textAlignVertical: TextAlignVertical.center,
                         readOnly: true,
                         onTap: () async {
+<<<<<<< HEAD
                           DateTime? newDate = await showDatePicker(context: context, initialDate: expense.date, firstDate: DateTime.now(), lastDate: DateTime.now().add(const Duration(days: 365)));
 
                           if (newDate != null) {
                             setState(() {
                               dateController.text = DateFormat('dd/MM/yyyy').format(newDate);
+=======
+                          DateTime? newDate = await showDatePicker(
+                              context: context,
+                              initialDate: expense.date,
+                              firstDate: DateTime.now(),
+                              lastDate: DateTime.now()
+                                  .add(const Duration(days: 365)));
+
+                          if (newDate != null) {
+                            setState(() {
+                              dateController.text =
+                                  DateFormat('dd/MM/yyyy').format(newDate);
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
                               // selectDate = newDate;
                               expense.date = newDate;
                             });
@@ -194,7 +301,13 @@ class _AddExpenseState extends State<AddExpense> {
                             color: Colors.grey,
                           ),
                           hintText: 'Date',
+<<<<<<< HEAD
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+=======
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide.none),
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
                         ),
                       ),
                       const SizedBox(
@@ -204,6 +317,7 @@ class _AddExpenseState extends State<AddExpense> {
                         width: double.infinity,
                         height: kToolbarHeight,
                         child: isLoading
+<<<<<<< HEAD
                           ? const Center(child: CircularProgressIndicator())
                           : TextButton(
                               onPressed: () {
@@ -224,6 +338,30 @@ class _AddExpenseState extends State<AddExpense> {
                                 style: TextStyle(fontSize: 22, color: Colors.white),
                               )
                             ),
+=======
+                            ? const Center(child: CircularProgressIndicator())
+                            : TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    expense.amount =
+                                        int.parse(expenseController.text);
+                                  });
+
+                                  context
+                                      .read<CreateExpenseBloc>()
+                                      .add(CreateExpense(expense));
+                                },
+                                style: TextButton.styleFrom(
+                                    backgroundColor: Colors.black,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(12))),
+                                child: const Text(
+                                  'Save',
+                                  style: TextStyle(
+                                      fontSize: 22, color: Colors.white),
+                                )),
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
                       )
                     ],
                   ),

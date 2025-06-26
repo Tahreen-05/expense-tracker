@@ -5,14 +5,20 @@ class Expense {
   Category category;
   DateTime date;
   int amount;
+<<<<<<< HEAD
   String userId;
+=======
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
 
   Expense({
     required this.expenseId,
     required this.category,
     required this.date,
     required this.amount,
+<<<<<<< HEAD
     required this.userId,
+=======
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
   });
 
   static final empty = Expense(
@@ -20,7 +26,10 @@ class Expense {
     category: Category.empty,
     date: DateTime.now(),
     amount: 0,
+<<<<<<< HEAD
     userId: '',
+=======
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
   );
 
   ExpenseEntity toEntity() {
@@ -29,7 +38,10 @@ class Expense {
       category: category,
       date: date,
       amount: amount,
+<<<<<<< HEAD
       userId: userId,
+=======
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
     );
   }
 
@@ -39,7 +51,10 @@ class Expense {
       category: entity.category,
       date: entity.date,
       amount: entity.amount,
+<<<<<<< HEAD
       userId: entity.userId,
+=======
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
     );
   }
 }

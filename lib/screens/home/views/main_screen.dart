@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+<<<<<<< HEAD
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/get_expenses_bloc/get_expenses_bloc.dart';
+=======
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
 
 class MainScreen extends StatefulWidget {
   final List<Expense> expenses;
@@ -322,6 +325,7 @@ class _MainScreenState extends State<MainScreen> {
                                         fontWeight: FontWeight.w400),
                                   ),
                                 ],
+<<<<<<< HEAD
                               ),
                               IconButton(
                                 icon: const Icon(Icons.delete, color: Colors.red),
@@ -329,6 +333,9 @@ class _MainScreenState extends State<MainScreen> {
                                   context.read<GetExpensesBloc>().add(DeleteExpense(widget.expenses[i].expenseId));
                                 },
                               ),
+=======
+                              )
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
                             ],
                           ),
                         ),

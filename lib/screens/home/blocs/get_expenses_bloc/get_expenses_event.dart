@@ -7,6 +7,7 @@ sealed class GetExpensesEvent extends Equatable {
   List<Object> get props => [];
 }
 
+<<<<<<< HEAD
 class GetExpenses extends GetExpensesEvent{}
 
 class DeleteExpense extends GetExpensesEvent {
@@ -16,3 +17,6 @@ class DeleteExpense extends GetExpensesEvent {
   @override
   List<Object> get props => [expenseId];
 }
+=======
+class GetExpenses extends GetExpensesEvent{}
+>>>>>>> ba32001186576face6cfda194fecdbb571f903c4
